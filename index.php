@@ -17,3 +17,5 @@ $app->run($requestHandler->getRouter());
 // handle the current request
 $request = Request::createFromGlobals();
 $requestHandler->handleRequest($request);
+
+var_dump($requestHandler->getRouter()->getRegisteredRoutes());
