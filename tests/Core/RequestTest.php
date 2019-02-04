@@ -4,6 +4,7 @@
 namespace Tests\Core;
 
 
+use App\Core\Method;
 use App\Core\Request;
 use PHPUnit\Framework\TestCase;
 
@@ -27,10 +28,10 @@ class RequestTest extends TestCase
     public function requestProvider()
     {
         return [
-            ['GET', 'test.php/'],
-            ['POST', 'test.php/'],
-            ['PUT', 'test.php/'],
-            ['DELETE', 'test.php/'],
+            [Method::GET, 'test.php/'],
+            [Method::POST, 'test.php/'],
+            [Method::PUT, 'test.php/'],
+            [Method::DELETE, 'test.php/'],
         ];
     }
 }
