@@ -11,25 +11,26 @@ class RequestTest extends TestCase
 {
     /**
      * @param $method
-     * @param $expectedRequestClass
+     * @param $uri
      * @dataProvider requestProvider
      */
-    public function testRequestCreation($method, $expectedRequestClass) {
+    public function testRequestCreation($method, $uri) {
         $_SERVER['REQUEST_METHOD'] = $method;
-        $_SERVER['REQUEST_URI'] = 'test.php/';
+        $_SERVER['REQUEST_URI'] = $uri;
 
         $request = Request::createFromGlobals();
 
-        $this->assertInstanceOf($expectedRequestClass, $request);
         $this->assertEquals($request->getMethod(), $method);
-        $this->assertEquals($request->getUri(), 'test.php/');
+        $this->assertEquals($request->getUri(), $uri);
     }
 
     public function requestProvider()
     {
         return [
-            ['GET', Request\GetRequest::class],
-            ['POST', Request\PostRequest::class],
+            ['GET', 'test.php/'],
+            ['POST', 'test.php/'],
+            ['PUT', 'test.php/'],
+            ['DELETE', 'test.php/'],
         ];
     }
 }
