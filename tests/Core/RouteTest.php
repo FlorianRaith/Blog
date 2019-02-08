@@ -26,12 +26,13 @@ class RouteTest extends TestCase
     public function routeRegexProvider(): array
     {
         return [
-            ['/', '/\/*/'],
-            ['/test', '/\/test\/*/'],
-            ['/hello/world', '/\/hello\/world\/*/'],
-            ['/user/{id}', '/\/user\/\w+\/*/'],
-            ['/{post}', '/\/\w+\/*/'],
-            ['/post/{post_id}/comment/{comment_id}', '/\/post\/\w+\/comment\/\w+\/*/']
+            ['/', '/^\/*$/'],
+            ['/test', '/^\/test\/*$/'],
+            ['/hello/world', '/^\/hello\/world\/*$/'],
+            ['/{foo}', '/^\/(\w+)\/*$/'],
+            ['/user/{id}', '/^\/user\/(\w+)\/*$/'],
+            ['/{post}', '/^\/(\w+)\/*$/'],
+            ['/post/{post_id}/comment/{comment_id}', '/^\/post\/(\w+)\/comment\/(\w+)\/*$/']
         ];
     }
 

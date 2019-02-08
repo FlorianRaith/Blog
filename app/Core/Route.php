@@ -4,6 +4,10 @@
 namespace App\Core;
 
 
+/**
+ * Class Route
+ * @package App\Core
+ */
 class Route
 {
     /**
@@ -52,31 +56,34 @@ class Route
         $this->generateRegex();
     }
 
+    /**
+     *
+     */
     private function generateRegex(): void
     {
         $trimmedPath = trim($this->path, '/');
 
         if(empty($trimmedPath)) {
-            $this->regex = '/\/*/';
+            $this->regex = '/^\/*$/';
             return;
         }
 
         $paths = explode('/', $trimmedPath);
 
-        $this->regex = '/';
+        $this->regex = '/^';
 
         foreach($paths as $part) {
             $this->regex .= '\/';
 
             if($part[0] == '{' && $part[strlen($part) - 1] == '}') {
-                $this->regex .= '\w+';
+                $this->regex .= '(\w+)';
                 array_push($this->parameters, substr($part, 1, -1));
             } else {
                 $this->regex .= $part;
             }
         }
 
-         $this->regex .= '\/*/';
+         $this->regex .= '\/*$/';
     }
 
     /**

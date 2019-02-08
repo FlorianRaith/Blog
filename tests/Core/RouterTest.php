@@ -15,7 +15,7 @@ class RouterTest extends TestCase
      * @param $routes
      * @dataProvider routerProvider
      */
-    public function testRouter($routes)
+    public function testRegisteredRoutes($routes)
     {
         $router = new Router();
 
@@ -70,4 +70,5 @@ class RouterTest extends TestCase
             ]
         ];
     }
+
 }

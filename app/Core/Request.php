@@ -21,6 +21,11 @@ class Request
     private $uri;
 
     /**
+     * @var array
+     */
+    private $parameters = [];
+
+    /**
      * Request constructor.
      * @param string $method
      * @param string $uri
@@ -55,5 +60,41 @@ class Request
     public function getUri(): string
     {
         return $this->uri;
+    }
+
+    /**
+     * @return array
+     */
+    public function getParameters(): array
+    {
+        return $this->parameters;
+    }
+
+    /**
+     * @param string $parameter
+     * @return string|null
+     */
+    public function parameter(string $parameter): ?string
+    {
+        if(!$this->hasParameter($parameter)) return null;
+        return $this->parameters[$parameter];
+    }
+
+    /**
+     * @param string $parameter
+     * @return bool
+     */
+    public function hasParameter(string $parameter): bool
+    {
+        return array_key_exists($parameter, $this->parameters);
+    }
+
+    /**
+     * @param string $parameter
+     * @param string $value
+     */
+    function setParameter(string $parameter, string $value): void
+    {
+        $this->parameters[$parameter] = $value;
     }
 }

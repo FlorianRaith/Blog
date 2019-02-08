@@ -16,6 +16,11 @@ $app->run($requestHandler->getRouter());
 
 // handle the current request
 $request = Request::createFromGlobals();
-$requestHandler->handleRequest($request);
 
-var_dump($requestHandler->getRouter()->getRegisteredRoutes());
+try {
+    $requestHandler->handleRequest($request);
+} catch (\App\Core\NotFoundException $e) {
+    die($e);
+}
+
+var_dump($request);

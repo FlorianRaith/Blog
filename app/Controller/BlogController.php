@@ -4,7 +4,7 @@
 namespace App\Controller;
 
 
-use App\Core\Request\GetRequest;
+use App\Core\Request;
 
 /**
  * Class BlogController
@@ -13,18 +13,18 @@ use App\Core\Request\GetRequest;
 class BlogController
 {
     /**
-     * @param GetRequest $request
+     * @param Request $request
      */
-    public function showAll(GetRequest $request)
+    public function showAll(Request $request)
     {
 
     }
 
     /**
-     * @param GetRequest $request
+     * @param Request $request
      */
-    public function show(GetRequest $request)
+    public function show(Request $request)
     {
-
+        $id = $request->parameter('id');
     }
 }
