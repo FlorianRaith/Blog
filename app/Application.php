@@ -17,9 +17,8 @@ class Application
      * @param Router $router
      */
     public function run(Router $router) {
-
         $router->get('/', BlogController::class, 'showAll');
         $router->get('/post/{post_id}', BlogController::class, 'show');
-        $router->get('/post/{post_id}/comment/{comment_id}', BlogController::class, 'showComment');
+        $router->get('/post/{post_id}/comment/{comment_id}', BlogController::class, 'show');
     }
 }

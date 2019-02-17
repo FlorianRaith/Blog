@@ -14,13 +14,12 @@ $requestHandler = new RequestHandler();
 $app = new Application();
 $app->run($requestHandler->getRouter());
 
-// handle the current request
+// create request object from globals
 $request = Request::createFromGlobals();
 
+// handle request and possible exceptions
 try {
     $requestHandler->handleRequest($request);
-} catch (\App\Core\NotFoundException $e) {
-    die($e);
+} catch (\Exception $e) {
+    $requestHandler->handleException($e);
 }
-
-var_dump($request);

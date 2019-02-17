@@ -9,6 +9,7 @@ use App\Core\NotFoundException;
 use App\Core\Request;
 use App\Core\RequestHandler;
 use PHPUnit\Framework\TestCase;
+use Tests\Mock\MockController;
 
 class RequestHandlerTest extends TestCase
 {
@@ -17,6 +18,7 @@ class RequestHandlerTest extends TestCase
      * @param $uri
      * @param $expectedParameters
      * @dataProvider requestParametersProvider
+     * @runInSeparateProcess
      * @throws \App\Core\NotFoundException
      */
     public function testRequestParameters($route, $uri, $expectedParameters)
@@ -25,7 +27,7 @@ class RequestHandlerTest extends TestCase
         $_SERVER['REQUEST_URI'] = $uri;
 
         $requestHandler = new RequestHandler();
-        $requestHandler->getRouter()->get($route, '','');
+        $requestHandler->getRouter()->get($route, MockController::class,'action');
 
         $request = Request::createFromGlobals();
         $requestHandler->handleRequest($request);
@@ -59,5 +61,20 @@ class RequestHandlerTest extends TestCase
         $request = Request::createFromGlobals();
         $requestHandler->handleRequest($request);
 
+    }
+
+    /**
+     * @runInSeparateProcess
+     */
+    public function testHandleException()
+    {
+        $exception = new NotFoundException('Resource Not Found');
+
+        $requestHandler = new RequestHandler();
+        $response = $requestHandler->handleException($exception);
+
+        $this->assertEquals(404, $response->getStatusCode());
+        $this->assertEquals('Content-type: text/plain; charset=UTF-8', $response->getContentType());
+        $this->assertEquals('Resource Not Found', $response->getContent());
     }
 }
