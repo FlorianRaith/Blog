@@ -46,7 +46,7 @@ class RequestHandler
 
         if($response == null) throw new NotFoundException('The controller function ' . $route->getControllerClass() . '::' .  $route->getControllerFunction() . ' was not found');
 
-        $this->handleResponse($response);
+        $this->handleResponse($response, $request);
     }
 
     /**
@@ -57,7 +57,7 @@ class RequestHandler
     {
         $response = new Response($exception->getCode(), Response::PLAIN_CONTENT_TYPE, $exception->getMessage());
 
-        $this->handleResponse($response);
+        $this->handleResponse($response, null);
 
         return $response;
     }
@@ -113,13 +113,14 @@ class RequestHandler
 
     /**
      * @param Response $response
+     * @param Request $request
      */
-    private function handleResponse(Response $response): void
+    private function handleResponse(Response $response, ?Request $request): void
     {
         http_response_code($response->getStatusCode());
 
         if($response instanceof RedirectResponse) {
-            $this->handleRedirect($response);
+            $this->handleRedirect($response, $request);
             return;
         }
 
@@ -132,8 +133,9 @@ class RequestHandler
 
     /**
      * @param RedirectResponse $response
+     * @param Request $request
      */
-    private function handleRedirect(RedirectResponse $response): void
+    private function handleRedirect(RedirectResponse $response, Request $request): void
     {
         $route = $this->getRouter()->getRouteByName($response->getRoute());
 
@@ -143,7 +145,7 @@ class RequestHandler
             $path = str_replace('{' . $parameter . '}', $value, $path);
         }
 
-        $url = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . $path;
+        $url = $request->getRootUrl() . $path;
 
         // set location header
         header('Location: ' . $url);

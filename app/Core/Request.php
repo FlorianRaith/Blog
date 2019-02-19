@@ -26,14 +26,28 @@ class Request
     private $parameters = [];
 
     /**
+     * @var string
+     */
+    private $httpHost;
+
+    /**
+     * @var string
+     */
+    private $rootUrl;
+
+    /**
      * Request constructor.
      * @param string $method
      * @param string $uri
+     * @param string $httpHost
+     * @param string $rootUrl
      */
-    private function __construct(string $method, string $uri)
+    public function __construct(string $method, string $uri, string $httpHost, string $rootUrl)
     {
         $this->method = $method;
         $this->uri = $uri;
+        $this->httpHost = $httpHost;
+        $this->rootUrl = $rootUrl;
     }
 
     /**
@@ -41,9 +55,11 @@ class Request
      */
     public static function createFromGlobals(): Request {
         $method = $_SERVER['REQUEST_METHOD'];
+        $httpHost = $_SERVER['HTTP_HOST'];
         $uri = $_SERVER['REQUEST_URI'];
+        $root = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http') . '://' . $httpHost;
 
-        return new Request($method, $uri);
+        return new Request($method, $uri, $httpHost, $root);
     }
 
     /**
@@ -96,5 +112,21 @@ class Request
     function setParameter(string $parameter, string $value): void
     {
         $this->parameters[$parameter] = $value;
+    }
+
+    /**
+     * @return string
+     */
+    public function getHttpHost(): string
+    {
+        return $this->httpHost;
+    }
+
+    /**
+     * @return string
+     */
+    public function getRootUrl(): string
+    {
+        return $this->rootUrl;
     }
 }
