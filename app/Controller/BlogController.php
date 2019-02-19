@@ -4,9 +4,8 @@
 namespace App\Controller;
 
 
+use App\Core\ControllerTrait;
 use App\Core\Request;
-use App\Core\Response\JsonResponse;
-use App\Core\Response\Response;
 
 /**
  * Class BlogController
@@ -14,27 +13,24 @@ use App\Core\Response\Response;
  */
 class BlogController
 {
-    /**
-     * @param Request $request
-     * @return Response
-     */
-    public function showAll(Request $request): Response
+    use ControllerTrait;
+
+    public function index()
     {
-        return new JsonResponse(200, ['status' => 'ok', 'message' => 'hello world!']);
+        return $this->json(['status' => 'ok', 'message' => 'Hello World']);
     }
 
-    /**
-     * @param Request $request
-     * @return Response
-     */
-    public function show(Request $request): Response
+
+    public function redirectTest()
     {
-        return new Response(200, Response::HTML_CONTENT_TYPE, '
-            <h1>Parameters:</h1>
-            <ul>
-                <li>Post ID: ' . $request->parameter('post_id') . '</li>
-                <li>Comment ID: ' . ($request->parameter('comment_id') ?? 'null') . '</li>
-            </ul>
+        return $this->redirect('post', ['post_id' => 'test']);
+    }
+
+
+    public function showPost(Request $request)
+    {
+        return $this->html('
+            <h1>Post <small>#' . $request->parameter('post_id') . '</small></h1>
         ');
     }
 }

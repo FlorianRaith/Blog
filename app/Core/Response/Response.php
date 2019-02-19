@@ -29,16 +29,23 @@ class Response
    private $content;
 
     /**
+     * @var array
+     */
+   private $additionalHeaders = [];
+
+    /**
      * Response constructor.
      * @param int $status_code
      * @param string $content_type
      * @param string $content
+     * @param array $additionalHeaders
      */
-    public function __construct(int $status_code, string $content_type, string $content)
+    public function __construct(int $status_code, string $content_type, string $content, array $additionalHeaders = [])
     {
         $this->status_code = $status_code;
         $this->content_type = $content_type;
         $this->content = $content;
+        $this->additionalHeaders = $additionalHeaders;
     }
 
     /**
@@ -63,5 +70,13 @@ class Response
     public function getContent(): string
     {
         return $this->content;
+    }
+
+    /**
+     * @return array
+     */
+    public function getAdditionalHeaders(): array
+    {
+        return $this->additionalHeaders;
     }
 }

@@ -13,6 +13,11 @@ class Route
     /**
      * @var string
      */
+    private $name;
+
+    /**
+     * @var string
+     */
     private $method;
 
     /**
@@ -132,5 +137,21 @@ class Route
     public function getParameters(): array
     {
         return $this->parameters;
+    }
+
+    /**
+     * @return string
+     */
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param string $name
+     */
+    public function setName(string $name): void
+    {
+            $this->name = $name;
     }
 }
