@@ -24,6 +24,11 @@ class RequestHandler
     private $controllers = [];
 
     /**
+     * @var AbstractApplication
+     */
+    private $app;
+
+    /**
      * RequestHandler constructor.
      */
     public function __construct()
@@ -100,8 +105,10 @@ class RequestHandler
         if(in_array($controllerClass, $this->controllers)) {
             $controllerInstance = $this->controllers[$controllerClass];
         } else {
+            /** @var AbstractController $controllerInstance */
             $controllerInstance = new $controllerClass;
             $this->controllers[$controllerFunction] = $controllerInstance;
+            if(method_exists($controllerClass, 'setApp')) $controllerInstance->setApp($this->app);
         }
 
         if(!method_exists($controllerInstance, $controllerFunction)) return null;
@@ -158,5 +165,13 @@ class RequestHandler
     public function getRouter(): Router
     {
         return $this->router;
+    }
+
+    /**
+     * @param AbstractApplication $app
+     */
+    public function setApp(AbstractApplication $app): void
+    {
+        $this->app = $app;
     }
 }

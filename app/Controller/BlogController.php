@@ -4,16 +4,16 @@
 namespace App\Controller;
 
 
-use App\Core\ControllerTrait;
+use App\Core\AbstractController;
 use App\Core\Request;
+use App\Service\TestService;
 
 /**
  * Class BlogController
  * @package App\Controller
  */
-class BlogController
+class BlogController extends AbstractController
 {
-    use ControllerTrait;
 
     public function index()
     {
@@ -26,6 +26,13 @@ class BlogController
         return $this->redirect('post', ['post_id' => 'test']);
     }
 
+    public function testService()
+    {
+        /** @var TestService $testService */
+        $testService = $this->getApp()->getService('test');
+
+        return $this->text($testService->getTest());
+    }
 
     public function showPost(Request $request)
     {
