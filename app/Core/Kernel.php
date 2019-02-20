@@ -8,10 +8,10 @@ use App\Core\Response\RedirectResponse;
 use App\Core\Response\Response;
 
 /**
- * Class RequestHandler
+ * Class Kernel
  * @package App\Core
  */
-class RequestHandler
+class Kernel
 {
     /**
      * @var Router
@@ -29,7 +29,7 @@ class RequestHandler
     private $app;
 
     /**
-     * RequestHandler constructor.
+     * Kernel constructor.
      */
     public function __construct()
     {

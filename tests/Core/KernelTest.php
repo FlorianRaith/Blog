@@ -7,11 +7,11 @@ namespace Tests\Core;
 use App\Core\Method;
 use App\Core\NotFoundException;
 use App\Core\Request;
-use App\Core\RequestHandler;
+use App\Core\Kernel;
 use PHPUnit\Framework\TestCase;
 use Tests\Mock\MockController;
 
-class RequestHandlerTest extends TestCase
+class KernelTest extends TestCase
 {
     /**
      * @param $route
@@ -20,17 +20,19 @@ class RequestHandlerTest extends TestCase
      * @dataProvider requestParametersProvider
      * @runInSeparateProcess
      * @throws \App\Core\NotFoundException
+     * @throws \ReflectionException
      */
     public function testRequestParameters($route, $uri, $expectedParameters)
     {
         $_SERVER['REQUEST_METHOD'] = Method::GET;
         $_SERVER['REQUEST_URI'] = $uri;
+        $_SERVER['HTTP_HOST'] = 'localhost';
 
-        $requestHandler = new RequestHandler();
-        $requestHandler->getRouter()->get($route, MockController::class,'action');
+        $kernel = new Kernel();
+        $kernel->getRouter()->get($route, MockController::class,'action');
 
         $request = Request::createFromGlobals();
-        $requestHandler->handleRequest($request);
+        $kernel->handleRequest($request);
 
         $this->assertEquals($expectedParameters, $request->getParameters());
     }
@@ -48,6 +50,7 @@ class RequestHandlerTest extends TestCase
 
     /**
      * @throws \App\Core\NotFoundException
+     * @throws \ReflectionException
      */
     public function testNotFoundException()
     {
@@ -55,8 +58,9 @@ class RequestHandlerTest extends TestCase
 
         $_SERVER['REQUEST_METHOD'] = Method::GET;
         $_SERVER['REQUEST_URI'] = '/test';
+        $_SERVER['HTTP_HOST'] = 'localhost';
 
-        $requestHandler = new RequestHandler();
+        $requestHandler = new Kernel();
 
         $request = Request::createFromGlobals();
         $requestHandler->handleRequest($request);
@@ -70,7 +74,7 @@ class RequestHandlerTest extends TestCase
     {
         $exception = new NotFoundException('Resource Not Found');
 
-        $requestHandler = new RequestHandler();
+        $requestHandler = new Kernel();
         $response = $requestHandler->handleException($exception);
 
         $this->assertEquals(404, $response->getStatusCode());

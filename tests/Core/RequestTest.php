@@ -18,6 +18,7 @@ class RequestTest extends TestCase
     public function testRequestCreation($method, $uri) {
         $_SERVER['REQUEST_METHOD'] = $method;
         $_SERVER['REQUEST_URI'] = $uri;
+        $_SERVER['HTTP_HOST'] = 'localhost';
 
         $request = Request::createFromGlobals();
 

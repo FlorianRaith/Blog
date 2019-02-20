@@ -20,22 +20,22 @@ class Bootstrap
      */
     public function run()
     {
-        // create a request handler
-        $requestHandler = new RequestHandler();
-        $requestHandler->setApp($this->application);
+        // create the kernel
+        $kernel = new Kernel();
+        $kernel->setApp($this->application);
 
         // boot the application
         $this->application->boot();
-        $this->application->registerRoutes($requestHandler->getRouter());
+        $this->application->registerRoutes($kernel->getRouter());
 
         // create request object from globals
         $request = Request::createFromGlobals();
 
         // handle request and possible exceptions
         try {
-            $requestHandler->handleRequest($request);
+            $kernel->handleRequest($request);
         } catch (\Exception $e) {
-            $requestHandler->handleException($e);
+            $kernel->handleException($e);
         }
     }
 
