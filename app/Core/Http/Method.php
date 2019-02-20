@@ -1,9 +1,13 @@
 <?php
 
 
-namespace App\Core;
+namespace App\Core\Http;
 
 
+/**
+ * Class Method
+ * @package App\Core\Http
+ */
 class Method
 {
     const GET = 'GET';

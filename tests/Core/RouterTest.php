@@ -4,9 +4,9 @@
 namespace Tests\Core;
 
 
-use App\Core\Method;
-use App\Core\Route;
-use App\Core\Router;
+use App\Core\Http\Method;
+use App\Core\Http\Route;
+use App\Core\Http\Router;
 use PHPUnit\Framework\TestCase;
 
 class RouterTest extends TestCase

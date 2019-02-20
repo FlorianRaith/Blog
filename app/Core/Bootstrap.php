@@ -4,6 +4,9 @@
 namespace App\Core;
 
 
+use App\Core\Http\Kernel;
+use App\Core\Http\Request;
+
 /**
  * Class Bootstrap
  * @package App\Core

@@ -4,8 +4,8 @@
 namespace App\Controller;
 
 
-use App\Core\AbstractController;
-use App\Core\Request;
+use App\Core\Http\AbstractController;
+use App\Core\Http\Request;
 use App\Service\TestService;
 
 /**

@@ -1,12 +1,12 @@
 <?php
 
 
-namespace App\Core;
+namespace App\Core\Http;
 
 
 /**
  * Class Request
- * @package App\Core
+ * @package App\Core\Http
  */
 class Request
 {

@@ -1,14 +1,14 @@
 <?php
 
 
-namespace App\Core;
+namespace App\Core\Exception;
 
 
 use Throwable;
 
 /**
  * Class NotFoundException
- * @package App\Core
+ * @package App\Core\Exception
  */
 class NotFoundException extends \Exception
 {

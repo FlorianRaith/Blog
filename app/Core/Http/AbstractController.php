@@ -1,9 +1,15 @@
 <?php
 
 
-namespace App\Core;
+namespace App\Core\Http;
 
 
+use App\Core\AbstractApplication;
+
+/**
+ * Class AbstractController
+ * @package App\Core\Http
+ */
 abstract class AbstractController
 {
     use ControllerTrait;

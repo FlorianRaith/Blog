@@ -4,8 +4,8 @@
 namespace Tests\Mock;
 
 
-use App\Core\Request;
-use App\Core\Response\Response;
+use App\Core\Http\Request;
+use App\Core\Http\Response\Response;
 
 /**
  * Class MockController

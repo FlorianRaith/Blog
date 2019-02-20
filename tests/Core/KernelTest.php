@@ -4,10 +4,10 @@
 namespace Tests\Core;
 
 
-use App\Core\Method;
-use App\Core\NotFoundException;
-use App\Core\Request;
-use App\Core\Kernel;
+use App\Core\Exception\NotFoundException;
+use App\Core\Http\Method;
+use App\Core\Http\Request;
+use App\Core\Http\Kernel;
 use PHPUnit\Framework\TestCase;
 use Tests\Mock\MockController;
 
@@ -19,8 +19,8 @@ class KernelTest extends TestCase
      * @param $expectedParameters
      * @dataProvider requestParametersProvider
      * @runInSeparateProcess
-     * @throws \App\Core\NotFoundException
      * @throws \ReflectionException
+     * @throws \App\Core\Exception\NotFoundException
      */
     public function testRequestParameters($route, $uri, $expectedParameters)
     {
@@ -49,8 +49,8 @@ class KernelTest extends TestCase
     }
 
     /**
-     * @throws \App\Core\NotFoundException
      * @throws \ReflectionException
+     * @throws \App\Core\Exception\NotFoundException
      */
     public function testNotFoundException()
     {

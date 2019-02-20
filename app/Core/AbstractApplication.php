@@ -4,6 +4,8 @@
 namespace App\Core;
 
 
+use App\Core\Http\Router;
+
 /**
  * Class AbstractApplication
  * @package App\Core

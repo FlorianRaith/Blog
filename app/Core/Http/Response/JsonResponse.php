@@ -1,12 +1,12 @@
 <?php
 
 
-namespace App\Core\Response;
+namespace App\Core\Http\Response;
 
 
 /**
  * Class JsonResponse
- * @package App\Core\Response
+ * @package App\Core\Http\Response
  */
 class JsonResponse extends Response
 {

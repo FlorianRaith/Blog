@@ -6,7 +6,7 @@ namespace App;
 
 use App\Controller\BlogController;
 use App\Core\AbstractApplication;
-use App\Core\Router;
+use App\Core\Http\Router;
 use App\Service\TestService;
 
 /**

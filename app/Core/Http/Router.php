@@ -1,12 +1,12 @@
 <?php
 
 
-namespace App\Core;
+namespace App\Core\Http;
 
 
 /**
  * Class Router
- * @package App\Core
+ * @package App\Core\Http
  */
 class Router
 {

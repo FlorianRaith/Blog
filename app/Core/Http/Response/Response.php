@@ -1,11 +1,11 @@
 <?php
 
 
-namespace App\Core\Response;
+namespace App\Core\Http\Response;
 
 /**
  * Class Response
- * @package App\Core\Response
+ * @package App\Core\Http\Response
  */
 class Response
 {
