@@ -26,12 +26,7 @@ class Route
     private $path;
 
     /**
-     * @var string
-     */
-    private $controllerClass;
-
-    /**
-     * @var string
+     * @var ControllerFunction
      */
     private $controllerFunction;
 
@@ -49,14 +44,12 @@ class Route
      * Route constructor.
      * @param string $method
      * @param string $path
-     * @param string $controllerClass
-     * @param string $controllerFunction
+     * @param ControllerFunction $controllerFunction
      */
-    public function __construct(string $method, string $path, string $controllerClass, string $controllerFunction)
+    public function __construct(string $method, string $path, ControllerFunction $controllerFunction)
     {
         $this->method = $method;
         $this->path = $path;
-        $this->controllerClass = $controllerClass;
         $this->controllerFunction = $controllerFunction;
         $this->generateRegex();
     }
@@ -108,17 +101,9 @@ class Route
     }
 
     /**
-     * @return string
+     * @return ControllerFunction
      */
-    public function getControllerClass(): string
-    {
-        return $this->controllerClass;
-    }
-
-    /**
-     * @return string
-     */
-    public function getControllerFunction(): string
+    public function getControllerFunction(): ControllerFunction
     {
         return $this->controllerFunction;
     }

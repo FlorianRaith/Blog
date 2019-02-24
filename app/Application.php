@@ -20,6 +20,7 @@ class Application extends AbstractApplication
      */
     public function boot(): void
     {
+        $this->setControllersPath('App\Controller');
         $this->registerService('test', new TestService());
     }
 
@@ -28,9 +29,9 @@ class Application extends AbstractApplication
      */
     public function registerRoutes(Router $router): void
     {
-        $router->get('/', BlogController::class, 'index');
-        $router->get('/redirectTest', BlogController::class, 'redirectTest');
-        $router->get('/testService', BlogController::class, 'testService');
-        $router->get('/post/{post_id}', BlogController::class, 'showPost')->setName('post');
+        $router->get('/', 'BlogController@index');
+        $router->get('/redirectTest', 'BlogController@redirectTest');
+        $router->get('/testService', 'BlogController@testService');
+        $router->get('/post/{post_id}', 'BlogController@showPost')->setName('post');
     }
 }

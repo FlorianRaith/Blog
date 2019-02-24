@@ -21,9 +21,9 @@ class Router
      * @param string $methodName
      * @return Route
      */
-    public function get(string $path, string $controllerClass, string $methodName): Route
+    public function get(string $path, string $controllerClass, string $methodName = null): Route
     {
-        $route = new Route(Method::GET, $path, $controllerClass, $methodName);
+        $route = new Route(Method::GET, $path, new ControllerFunction($controllerClass, $methodName));
         array_push($this->registeredRoutes, $route);
         return $route;
     }
@@ -34,9 +34,9 @@ class Router
      * @param string $methodName
      * @return Route
      */
-    public function post(string $path, string $controllerClass, string $methodName): Route
+    public function post(string $path, string $controllerClass, string $methodName = null): Route
     {
-        $route = new Route(Method::POST, $path, $controllerClass, $methodName);
+       $route = new Route(Method::POST, $path, new ControllerFunction($controllerClass, $methodName));
         array_push($this->registeredRoutes, $route);
         return $route;
     }
@@ -47,9 +47,9 @@ class Router
      * @param string $methodName
      * @return Route
      */
-    public function put(string $path, string $controllerClass, string $methodName): Route
+    public function put(string $path, string $controllerClass, string $methodName = null): Route
     {
-        $route = new Route(Method::PUT, $path, $controllerClass, $methodName);
+        $route = new Route(Method::PUT, $path, new ControllerFunction($controllerClass, $methodName));
         array_push($this->registeredRoutes, $route);
         return $route;
     }
@@ -60,9 +60,9 @@ class Router
      * @param string $methodName
      * @return Route
      */
-    public function delete(string $path, string $controllerClass, string $methodName): Route
+    public function delete(string $path, string $controllerClass, string $methodName = null): Route
     {
-        $route = new Route(Method::DELETE, $path, $controllerClass, $methodName);
+        $route = new Route(Method::DELETE, $path, new ControllerFunction($controllerClass, $methodName));
         array_push($this->registeredRoutes, $route);
         return $route;
     }

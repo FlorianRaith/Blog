@@ -18,6 +18,11 @@ abstract class AbstractApplication
     private $services = [];
 
     /**
+     * @var string
+     */
+    private $controllersPath;
+
+    /**
      *
      */
     abstract public function boot(): void;
@@ -43,5 +48,21 @@ abstract class AbstractApplication
     public function getService(string $name)
     {
         return $this->services[$name];
+    }
+
+    /**
+     * @param string $controllersPath
+     */
+    protected function setControllersPath(string $controllersPath): void
+    {
+        $this->controllersPath = $controllersPath;
+    }
+
+    /**
+     * @return string
+     */
+    public function getControllersPath(): string
+    {
+        return $this->controllersPath;
     }
 }

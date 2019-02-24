@@ -9,6 +9,7 @@ use App\Core\Http\Method;
 use App\Core\Http\Request;
 use App\Core\Http\Kernel;
 use PHPUnit\Framework\TestCase;
+use Tests\Mock\MockApplication;
 use Tests\Mock\MockController;
 
 class KernelTest extends TestCase
@@ -29,6 +30,7 @@ class KernelTest extends TestCase
         $_SERVER['HTTP_HOST'] = 'localhost';
 
         $kernel = new Kernel();
+        $kernel->setApp(new MockApplication());
         $kernel->getRouter()->get($route, MockController::class,'action');
 
         $request = Request::createFromGlobals();
@@ -60,10 +62,11 @@ class KernelTest extends TestCase
         $_SERVER['REQUEST_URI'] = '/test';
         $_SERVER['HTTP_HOST'] = 'localhost';
 
-        $requestHandler = new Kernel();
+        $kernel = new Kernel();
+        $kernel->setApp(new MockApplication());
 
         $request = Request::createFromGlobals();
-        $requestHandler->handleRequest($request);
+        $kernel->handleRequest($request);
 
     }
 
@@ -74,8 +77,9 @@ class KernelTest extends TestCase
     {
         $exception = new NotFoundException('Resource Not Found');
 
-        $requestHandler = new Kernel();
-        $response = $requestHandler->handleException($exception);
+        $kernel = new Kernel();
+        $kernel->setApp(new MockApplication());
+        $response = $kernel->handleException($exception);
 
         $this->assertEquals(404, $response->getStatusCode());
         $this->assertEquals('Content-type: text/plain; charset=UTF-8', $response->getContentType());

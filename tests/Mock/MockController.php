@@ -14,10 +14,9 @@ use App\Core\Http\Response\Response;
 class MockController
 {
     /**
-     * @param Request $request
      * @return Response
      */
-    public function action(Request $request): Response
+    public function action(): Response
     {
         return new Response(200, Response::PLAIN_CONTENT_TYPE, 'success');
     }

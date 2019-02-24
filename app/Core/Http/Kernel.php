@@ -49,7 +49,7 @@ class Kernel
 
         if($route == null) throw new NotFoundException('A suitable route could not be found');
 
-        $response = $this->callController($route->getControllerClass(), $route->getControllerFunction(), $request);
+        $response = $this->callController($route->getControllerFunction(), $request);
 
         if($response == null) throw new NotFoundException('The controller function ' . $route->getControllerClass() . '::' .  $route->getControllerFunction() . ' was not found');
 
@@ -96,28 +96,26 @@ class Kernel
     }
 
     /**
-     * @param string $controllerClass
-     * @param string $controllerFunction
+     * @param ControllerFunction $controllerFunction
      * @param Request $request
      * @return Response
      * @throws \ReflectionException
      */
-    private function callController(string $controllerClass, string $controllerFunction, Request $request): ?Response
+    private function callController(ControllerFunction $controllerFunction, Request $request): ?Response
     {
+        $controllerClass = $controllerFunction->getClass($this->app);
+        if($controllerClass == null) return null;
+
         if(in_array($controllerClass, $this->controllers)) {
             $controllerInstance = $this->controllers[$controllerClass];
         } else {
             /** @var AbstractController $controllerInstance */
             $controllerInstance = new $controllerClass;
-            $this->controllers[$controllerFunction] = $controllerInstance;
+            $this->controllers[$controllerClass] = $controllerInstance;
             if(method_exists($controllerClass, 'setApp')) $controllerInstance->setApp($this->app);
         }
 
-        if(!method_exists($controllerInstance, $controllerFunction)) return null;
-        $reflect = new \ReflectionMethod($controllerClass, $controllerFunction);
-        if($reflect->getNumberOfParameters() == 1) return $controllerInstance->$controllerFunction($request);
-
-        return $controllerInstance->$controllerFunction();
+        return $controllerFunction->invoke($this->app, $controllerInstance, $request);
     }
 
     /**
