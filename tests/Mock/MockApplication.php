@@ -16,7 +16,7 @@ class MockApplication extends AbstractApplication
      */
     public function boot(): void
     {
-        $this->setControllersPath(self::CONTROLLER_PATH);
+        $this->setControllerNamespace(self::CONTROLLER_PATH);
     }
 
     /**

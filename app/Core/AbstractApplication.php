@@ -20,7 +20,7 @@ abstract class AbstractApplication
     /**
      * @var string
      */
-    private $controllersPath;
+    private $controllerNamespace;
 
     /**
      * @var string
@@ -56,19 +56,19 @@ abstract class AbstractApplication
     }
 
     /**
-     * @param string $controllersPath
+     * @param string $controllerNamespace
      */
-    protected function setControllersPath(string $controllersPath): void
+    protected function setControllerNamespace(string $controllerNamespace): void
     {
-        $this->controllersPath = $controllersPath;
+        $this->controllerNamespace = $controllerNamespace;
     }
 
     /**
      * @return string
      */
-    public function getControllersPath(): string
+    public function getControllerNamespace(): string
     {
-        return $this->controllersPath;
+        return $this->controllerNamespace;
     }
 
     /**

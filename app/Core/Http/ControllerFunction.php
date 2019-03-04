@@ -55,7 +55,7 @@ class ControllerFunction
     {
         if(!isset($this->className)) return null;
         if($this->hasClassPath) $fullClass = $this->className;
-        else $fullClass = $application->getControllersPath() . '\\' . $this->className;
+        else $fullClass = $application->getControllerNamespace() . '\\' . $this->className;
 
         if(class_exists($fullClass)) return $fullClass;
         return null;
