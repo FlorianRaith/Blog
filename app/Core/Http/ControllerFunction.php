@@ -78,4 +78,9 @@ class ControllerFunction
         return $controllerInstance->{$this->functionName}();
     }
 
+    public function __toString()
+    {
+        return $this->className . '@' . $this->functionName;
+    }
+
 }

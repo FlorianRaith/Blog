@@ -7,6 +7,7 @@ namespace App\Core\Http;
 use App\Core\AbstractApplication;
 use App\Core\Exception\NotFoundException;
 use App\Core\Http\Response\RedirectResponse;
+use App\Core\Http\Response\RenderResponse;
 use App\Core\Http\Response\Response;
 
 /**
@@ -51,7 +52,7 @@ class Kernel
 
         $response = $this->callController($route->getControllerFunction(), $request);
 
-        if($response == null) throw new NotFoundException('The controller function ' . $route->getControllerClass() . '::' .  $route->getControllerFunction() . ' was not found');
+        if($response == null) throw new NotFoundException('The controller function ' . $route->getControllerFunction() . ' was not found');
 
         $this->handleResponse($response, $request);
     }
@@ -135,6 +136,12 @@ class Kernel
         foreach ($response->getAdditionalHeaders() as $header) {
             header($header);
         }
+
+        if($response instanceof RenderResponse) {
+            $this->handleRenderView($response);
+            return;
+        }
+
         echo $response->getContent();
     }
 
@@ -157,6 +164,16 @@ class Kernel
         // set location header
         header('Location: ' . $url);
         exit();
+    }
+
+    /**
+     * @param RenderResponse $response
+     */
+    private function handleRenderView(RenderResponse $response): void
+    {
+        $viewPath = $this->app->getViewsPath() . '/' . $response->getViewName() . '.view.php';
+        $data = $response->getData();
+        include $this->app->getViewsPath() . '/template.view.php';
     }
 
     /**

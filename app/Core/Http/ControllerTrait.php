@@ -6,6 +6,7 @@ namespace App\Core\Http;
 
 use App\Core\Http\Response\JsonResponse;
 use App\Core\Http\Response\RedirectResponse;
+use App\Core\Http\Response\RenderResponse;
 use App\Core\Http\Response\Response;
 
 /**
@@ -15,11 +16,13 @@ use App\Core\Http\Response\Response;
 trait ControllerTrait
 {
     /**
+     * @param string $viewName
+     * @param array $data
      * @return Response
      */
-    public function render(): Response
+    public function render(string $viewName, array $data = []): Response
     {
-        return null;
+        return new RenderResponse(200, $viewName, $data);
     }
 
     /**

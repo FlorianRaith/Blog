@@ -23,6 +23,11 @@ abstract class AbstractApplication
     private $controllersPath;
 
     /**
+     * @var string
+     */
+    private $viewsPath;
+
+    /**
      *
      */
     abstract public function boot(): void;
@@ -64,5 +69,21 @@ abstract class AbstractApplication
     public function getControllersPath(): string
     {
         return $this->controllersPath;
+    }
+
+    /**
+     * @param string $viewsPath
+     */
+    protected function setViewsPath(string $viewsPath): void
+    {
+        $this->viewsPath = $viewsPath;
+    }
+
+    /**
+     * @return string
+     */
+    public function getViewsPath(): string
+    {
+        return $this->viewsPath;
     }
 }
