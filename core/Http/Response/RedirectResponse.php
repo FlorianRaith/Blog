@@ -1,12 +1,12 @@
 <?php
 
 
-namespace App\Core\Http\Response;
+namespace Core\Http\Response;
 
 
 /**
  * Class RedirectResponse
- * @package App\Core\Http\Response
+ * @package Core\Http\Response
  */
 class RedirectResponse extends Response
 {

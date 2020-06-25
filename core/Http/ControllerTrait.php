@@ -1,17 +1,17 @@
 <?php
 
 
-namespace App\Core\Http;
+namespace Core\Http;
 
 
-use App\Core\Http\Response\JsonResponse;
-use App\Core\Http\Response\RedirectResponse;
-use App\Core\Http\Response\RenderResponse;
-use App\Core\Http\Response\Response;
+use Core\Http\Response\JsonResponse;
+use Core\Http\Response\RedirectResponse;
+use Core\Http\Response\RenderResponse;
+use Core\Http\Response\Response;
 
 /**
  * Trait ControllerTrait
- * @package App\Core\Http
+ * @package Core\Http
  */
 trait ControllerTrait
 {

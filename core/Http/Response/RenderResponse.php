@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Core\Http\Response;
+namespace Core\Http\Response;
 
 
 class RenderResponse extends Response

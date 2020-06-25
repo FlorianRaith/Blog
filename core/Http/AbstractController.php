@@ -1,14 +1,14 @@
 <?php
 
 
-namespace App\Core\Http;
+namespace Core\Http;
 
 
-use App\Core\AbstractApplication;
+use Core\AbstractApplication;
 
 /**
  * Class AbstractController
- * @package App\Core\Http
+ * @package Core\Http
  */
 abstract class AbstractController
 {

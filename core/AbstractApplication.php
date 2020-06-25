@@ -1,14 +1,14 @@
 <?php
 
 
-namespace App\Core;
+namespace Core;
 
 
-use App\Core\Http\Router;
+use Core\Http\Router;
 
 /**
  * Class AbstractApplication
- * @package App\Core
+ * @package Core
  */
 abstract class AbstractApplication
 {

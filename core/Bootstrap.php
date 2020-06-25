@@ -1,15 +1,15 @@
 <?php
 
 
-namespace App\Core;
+namespace Core;
 
 
-use App\Core\Http\Kernel;
-use App\Core\Http\Request;
+use Core\Http\Kernel;
+use Core\Http\Request;
 
 /**
  * Class Bootstrap
- * @package App\Core
+ * @package Core
  */
 class Bootstrap
 {

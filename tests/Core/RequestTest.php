@@ -4,8 +4,8 @@
 namespace Tests\Core;
 
 
-use App\Core\Http\Method;
-use App\Core\Http\Request;
+use Core\Http\Method;
+use Core\Http\Request;
 use PHPUnit\Framework\TestCase;
 
 class RequestTest extends TestCase

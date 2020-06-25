@@ -4,7 +4,7 @@
 namespace Tests\Mock;
 
 
-use App\Core\Http\ControllerFunction;
+use Core\Http\ControllerFunction;
 
 class EmptyControllerFunction extends ControllerFunction
 {

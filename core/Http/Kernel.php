@@ -1,18 +1,18 @@
 <?php
 
 
-namespace App\Core\Http;
+namespace Core\Http;
 
 
-use App\Core\AbstractApplication;
-use App\Core\Exception\NotFoundException;
-use App\Core\Http\Response\RedirectResponse;
-use App\Core\Http\Response\RenderResponse;
-use App\Core\Http\Response\Response;
+use Core\AbstractApplication;
+use Core\Exception\NotFoundException;
+use Core\Http\Response\RedirectResponse;
+use Core\Http\Response\RenderResponse;
+use Core\Http\Response\Response;
 
 /**
  * Class Kernel
- * @package App\Core\Http
+ * @package Core\Http
  */
 class Kernel
 {

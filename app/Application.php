@@ -4,8 +4,8 @@
 namespace App;
 
 
-use App\Core\AbstractApplication;
-use App\Core\Http\Router;
+use Core\AbstractApplication;
+use Core\Http\Router;
 use App\Service\TestService;
 
 /**

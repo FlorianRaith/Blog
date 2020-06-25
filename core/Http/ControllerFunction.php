@@ -1,15 +1,15 @@
 <?php
 
 
-namespace App\Core\Http;
+namespace Core\Http;
 
 
-use App\Core\AbstractApplication;
-use App\Core\Http\Response\Response;
+use Core\AbstractApplication;
+use Core\Http\Response\Response;
 
 /**
  * Class ControllerFunction
- * @package App\Core\Http
+ * @package Core\Http
  */
 class ControllerFunction
 {

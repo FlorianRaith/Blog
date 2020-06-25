@@ -2,9 +2,9 @@
 
 namespace Tests\Core;
 
-use App\Core\Http\ControllerFunction;
-use App\Core\Http\Request;
-use App\Core\Http\Response\Response;
+use Core\Http\ControllerFunction;
+use Core\Http\Request;
+use Core\Http\Response\Response;
 use PHPUnit\Framework\TestCase;
 use Tests\Mock\MockApplication;
 use Tests\Mock\MockController;

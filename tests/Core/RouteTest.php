@@ -4,8 +4,8 @@
 namespace Tests\Core;
 
 
-use App\Core\Http\Method;
-use App\Core\Http\Route;
+use Core\Http\Method;
+use Core\Http\Route;
 use PHPUnit\Framework\TestCase;
 use Tests\Mock\EmptyControllerFunction;
 

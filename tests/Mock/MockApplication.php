@@ -4,8 +4,8 @@
 namespace Tests\Mock;
 
 
-use App\Core\AbstractApplication;
-use App\Core\Http\Router;
+use Core\AbstractApplication;
+use Core\Http\Router;
 
 class MockApplication extends AbstractApplication
 {
