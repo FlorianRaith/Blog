@@ -18,6 +18,7 @@
         }
     },
     "require": {
-        "ext-json": "*"
+        "ext-json": "*",
+        "twig/twig": "^3.0"
     }
 }

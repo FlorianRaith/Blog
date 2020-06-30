@@ -28,6 +28,11 @@ abstract class AbstractApplication
     private $viewsPath;
 
     /**
+     * @var string
+     */
+    private $viewsCachePath;
+
+    /**
      *
      */
     abstract public function boot(): void;
@@ -85,5 +90,21 @@ abstract class AbstractApplication
     public function getViewsPath(): string
     {
         return $this->viewsPath;
+    }
+
+    /**
+     * @return string
+     */
+    public function getViewsCachePath(): string
+    {
+        return $this->viewsCachePath;
+    }
+
+    /**
+     * @param string $viewsCachePath
+     */
+    public function setViewsCachePath(string $viewsCachePath): void
+    {
+        $this->viewsCachePath = $viewsCachePath;
     }
 }

@@ -21,6 +21,7 @@ class Application extends AbstractApplication
     {
         $this->setControllerNamespace('App\Controller');
         $this->setViewsPath(PROJECT_ROOT . '/views');
+        $this->setViewsCachePath(PROJECT_ROOT . '/cache');
         $this->registerService('test', new TestService());
     }
 

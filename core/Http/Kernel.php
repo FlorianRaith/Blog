@@ -9,6 +9,13 @@ use Core\Exception\NotFoundException;
 use Core\Http\Response\RedirectResponse;
 use Core\Http\Response\RenderResponse;
 use Core\Http\Response\Response;
+use Exception;
+use ReflectionException;
+use Twig\Environment;
+use Twig\Error\LoaderError;
+use Twig\Error\RuntimeError;
+use Twig\Error\SyntaxError;
+use Twig\Loader\FilesystemLoader;
 
 /**
  * Class Kernel
@@ -32,6 +39,11 @@ class Kernel
     private $app;
 
     /**
+     * @var Environment
+     */
+    private $twig;
+
+    /**
      * Kernel constructor.
      */
     public function __construct()
@@ -42,7 +54,7 @@ class Kernel
     /**
      * @param Request $request
      * @throws NotFoundException
-     * @throws \ReflectionException
+     * @throws ReflectionException
      */
     public function handleRequest(Request $request): void
     {
@@ -58,10 +70,10 @@ class Kernel
     }
 
     /**
-     * @param \Exception $exception
+     * @param Exception $exception
      * @return Response
      */
-    public function handleException(\Exception $exception): Response
+    public function handleException(Exception $exception): Response
     {
         $response = new Response($exception->getCode(), Response::PLAIN_CONTENT_TYPE, $exception->getMessage());
 
@@ -100,7 +112,7 @@ class Kernel
      * @param ControllerFunction $controllerFunction
      * @param Request $request
      * @return Response
-     * @throws \ReflectionException
+     * @throws ReflectionException
      */
     private function callController(ControllerFunction $controllerFunction, Request $request): ?Response
     {
@@ -171,9 +183,12 @@ class Kernel
      */
     private function handleRenderView(RenderResponse $response): void
     {
-        $viewPath = $this->app->getViewsPath() . '/' . $response->getViewName() . '.view.php';
-        $data = $response->getData();
-        include $this->app->getViewsPath() . '/template.view.php';
+        try {
+            echo $this->twig->render($response->getViewName() . '.twig', $response->getData());
+        } catch (LoaderError $e) {
+        } catch (RuntimeError $e) {
+        } catch (SyntaxError $e) {
+        }
     }
 
     /**
@@ -190,5 +205,16 @@ class Kernel
     public function setApp(AbstractApplication $app): void
     {
         $this->app = $app;
+    }
+
+    /**
+     *
+     */
+    public function initViewEngine(): void
+    {
+        $loader = new FilesystemLoader($this->app->getViewsPath());
+        $this->twig = new Environment($loader, [
+            'cache' => $this->app->getViewsCachePath()
+        ]);
     }
 }

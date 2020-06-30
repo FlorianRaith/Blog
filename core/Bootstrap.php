@@ -31,6 +31,9 @@ class Bootstrap
         $this->application->boot();
         $this->application->registerRoutes($kernel->getRouter());
 
+        // setup view engine
+        $kernel->initViewEngine();
+
         // create request object from globals
         $request = Request::createFromGlobals();
 
